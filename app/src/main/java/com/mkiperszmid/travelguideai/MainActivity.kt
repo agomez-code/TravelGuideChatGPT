@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.mkiperszmid.travelguideai.home.presentation.HomeScreen
+import com.mkiperszmid.travelguideai.home.presentacion.HomeScreen
 import com.mkiperszmid.travelguideai.ui.theme.TravelGuideAITheme
 import dagger.hilt.android.AndroidEntryPoint
 
