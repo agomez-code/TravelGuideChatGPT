@@ -11,19 +11,12 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: HomeRepository) : ViewModel() {
     init {
-
-        println("Soy el home view model - AGOMEZ.CODE!")
-        println("Mi api key es: ${BuildConfig.API_KEY}")
-
         viewModelScope.launch {
             repository.getTravelGuide().onSuccess {
-                println("EXITO!")
                 println(it)
             }.onFailure {
-                println("ERROR!")
                 println("Hubo un error")
             }
         }
-
     }
 }
