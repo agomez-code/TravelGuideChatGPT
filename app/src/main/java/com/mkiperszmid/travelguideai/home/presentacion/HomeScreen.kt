@@ -1,12 +1,26 @@
 package com.mkiperszmid.travelguideai.home.presentacion
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mkiperszmid.travelguideai.home.presentacion.component.HomeSearchBar
 
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-    Text(text = "Soy la Home Screen - AGOMEZ.CODE!")
+    Column(modifier = Modifier.fillMaxSize()) {
+        Text(text = "A donde viajas?")
+        HomeSearchBar(
+            onSearch = {},
+            placeholder = "Pais, CIudad",
+            inputText = "",
+            onValueChange = {},
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
 }

@@ -11,6 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: HomeRepository) : ViewModel() {
     init {
+
         viewModelScope.launch {
             repository.getTravelGuide().onSuccess {
                 println(it)
