@@ -1,5 +1,8 @@
 package com.mkiperszmid.travelguideai.home.presentacion
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mkiperszmid.travelguideai.BuildConfig
@@ -10,8 +13,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: HomeRepository) : ViewModel() {
-    init {
 
+    var state by mutableStateOf(HomeState())
+        private set
+
+    init {
         viewModelScope.launch {
             repository.getTravelGuide().onSuccess {
                 println(it)
@@ -19,5 +25,11 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
                 println("Hubo un error")
             }
         }
+    }
+
+    fun onSearchTextChange(newText: String) {
+        state = state.copy(
+            searchText = newText
+        )
     }
 }
