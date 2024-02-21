@@ -18,6 +18,7 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         private set
 
     init {
+        /*
         viewModelScope.launch {
             repository.getTravelGuide().onSuccess {
                 println(it)
@@ -25,11 +26,22 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
                 println("Hubo un error")
             }
         }
+        */
     }
 
     fun onSearchTextChange(newText: String) {
         state = state.copy(
             searchText = newText
         )
+    }
+
+    fun search() {
+        viewModelScope.launch {
+            repository.getTravelGuide(state.searchText).onSuccess {
+                println(it)
+            }.onFailure {
+                println("Hubo un error")
+            }
+        }
     }
 }

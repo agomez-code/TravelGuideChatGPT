@@ -18,7 +18,9 @@ fun HomeScreen(
     Column(modifier = Modifier.fillMaxSize()) {
         Text(text = "A donde viajas?")
         HomeSearchBar(
-            onSearch = {},
+            onSearch = {
+                viewModel.search()
+            },
             placeholder = "Pais, CIudad",
             inputText = state.searchText,
             onValueChange = { viewModel.onSearchTextChange(it) },
