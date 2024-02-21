@@ -16,19 +16,7 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
 
     var state by mutableStateOf(HomeState())
         private set
-
-    init {
-        /*
-        viewModelScope.launch {
-            repository.getTravelGuide().onSuccess {
-                println(it)
-            }.onFailure {
-                println("Hubo un error")
-            }
-        }
-        */
-    }
-
+    
     fun onSearchTextChange(newText: String) {
         state = state.copy(
             searchText = newText
