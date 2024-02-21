@@ -16,12 +16,6 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
 
     var state by mutableStateOf(HomeState())
         private set
-    
-    fun onSearchTextChange(newText: String) {
-        state = state.copy(
-            searchText = newText
-        )
-    }
 
     fun search() {
         viewModelScope.launch {
@@ -32,4 +26,18 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
             }
         }
     }
+
+    fun onSearchTextChange(newText: String) {
+        state = state.copy(
+            searchText = newText
+        )
+    }
+
+    fun onFilterClick() {
+        state = state.copy(
+            showDialog = true
+        )
+    }
+
+
 }
