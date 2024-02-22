@@ -1,5 +1,6 @@
 package com.mkiperszmid.travelguideai.home.presentacion
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,6 +33,10 @@ fun HomeScreen(
                 viewModel.onSettingChange(it)
             }
         )
+    }
+
+    BackHandler(state.chatReply != null) {
+        viewModel.onBackPress()
     }
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {

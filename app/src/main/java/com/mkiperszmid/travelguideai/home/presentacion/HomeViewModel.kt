@@ -48,6 +48,12 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         )
     }
 
+    fun onBackPress() {
+        state = state.copy(
+            chatReply = null
+        )
+    }
+
     fun onSettingChange(action: HomeFilterDialogAction) {
         when(action){
             HomeFilterDialogAction.OnApplyClick -> {
