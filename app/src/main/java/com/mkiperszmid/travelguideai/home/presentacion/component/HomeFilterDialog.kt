@@ -3,11 +3,14 @@ package com.mkiperszmid.travelguideai.home.presentacion.component
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
+import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -41,6 +44,27 @@ fun HomeFilterDialog (
                 ) {
                     Text (text = "Personas")
                     HomeFilterIncrement(number = 1, onMinus = { /*TODO*/ }, onPlus = { /*TODO*/ })
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Divider(modifier = Modifier.fillMaxWidth())
+                Spacer(modifier = Modifier.height(16.dp))
+                Row (
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text (text = "Restaurantes")
+                    HomFilterCheckbox(onClick = { /*TODO*/ }, isChecked = true)
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Divider(modifier = Modifier.fillMaxWidth())
+                Row (
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text (text = "Museos")
+                    HomFilterCheckbox(onClick = { /*TODO*/ }, isChecked = false)
                 }
             }
         }, shape = RoundedCornerShape(30.dp)

@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun HomFilterSettingsButton (
     onClick: () -> Unit,
-    icon: ImageVector,
+    icon: ImageVector?,
     modifier: Modifier = Modifier
 ){
     OutlinedButton(
@@ -28,10 +28,12 @@ fun HomFilterSettingsButton (
         shape = RoundedCornerShape(10.dp),
         contentPadding = PaddingValues(0.dp)
     ){
+        if(icon != null) {
         Icon(
             imageVector = icon,
             contentDescription = "icon",
             tint = Color.Green)
+        }
     }
 }
 
