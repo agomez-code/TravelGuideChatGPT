@@ -52,5 +52,10 @@ fun HomeScreen(
             )
             HomeFilterButton(onClick = { viewModel.onFilterClick() })
         }
+
+        state.chatReply?.let {
+            Text(text = it)
+        }
+
     }
 }
