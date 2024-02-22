@@ -27,6 +27,8 @@ fun HomeScreen(
         HomeFilterDialog(
             onDismiss = {
                 viewModel.onFilterDismiss()
+            }, filterSettings = state.filterSettings, onAction = {
+                viewModel.onSettingChange(it)
             }
         )
     }

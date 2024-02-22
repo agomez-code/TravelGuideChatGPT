@@ -45,4 +45,40 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         )
     }
 
+    fun onSettingChange(action: HomeFilterDialogAction) {
+        when(action){
+            HomeFilterDialogAction.OnApplyClick -> {
+                TODO()
+            }
+            HomeFilterDialogAction.OnMuseumsClick -> {
+                state = state.copy(
+                    filterSettings = state.filterSettings.copy(
+                        museums = !state.filterSettings.museums
+                    )
+                )
+            }
+            HomeFilterDialogAction.OnPeopleMinus -> {
+                state = state.copy(
+                    filterSettings = state.filterSettings.copy(
+                        people = state.filterSettings.people - 1
+                    )
+                )
+            }
+            HomeFilterDialogAction.OnPeoplePlus -> {
+                state = state.copy(
+                    filterSettings = state.filterSettings.copy(
+                        people = state.filterSettings.people + 1
+                    )
+                )
+            }
+            HomeFilterDialogAction.OnRestaurantsClick -> {
+                state = state.copy(
+                    filterSettings = state.filterSettings.copy(
+                        restaurants = !state.filterSettings.restaurants
+                    )
+                )
+            }
+        }
+    }
+
 }

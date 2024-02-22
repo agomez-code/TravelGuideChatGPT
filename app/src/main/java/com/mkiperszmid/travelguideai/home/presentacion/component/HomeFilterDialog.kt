@@ -17,10 +17,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mkiperszmid.travelguideai.home.presentacion.HomeFilterDialogAction
+import com.mkiperszmid.travelguideai.home.presentacion.HomeFilterSettings
 
 @Composable
 fun HomeFilterDialog (
     onDismiss: () -> Unit,
+    filterSettings: HomeFilterSettings,
+    onAction: (HomeFilterDialogAction) -> Unit,
     modifier: Modifier = Modifier
 ){
     AlertDialog(
@@ -28,7 +32,7 @@ fun HomeFilterDialog (
         modifier = modifier.fillMaxWidth(),
         buttons = {
             Button(
-                onClick = { /*TODO*/ },
+                onClick = { onAction(HomeFilterDialogAction.OnApplyClick) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)) {
@@ -44,7 +48,10 @@ fun HomeFilterDialog (
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text (text = "Personas")
-                    HomeFilterIncrement(number = 1, onMinus = { /*TODO*/ }, onPlus = { /*TODO*/ })
+                    HomeFilterIncrement(
+                        number = filterSettings.people,
+                        onMinus = { onAction(HomeFilterDialogAction.OnPeopleMinus) },
+                        onPlus = { onAction(HomeFilterDialogAction.OnPeoplePlus) })
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Divider(modifier = Modifier.fillMaxWidth())
@@ -55,7 +62,9 @@ fun HomeFilterDialog (
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text (text = "Restaurantes")
-                    HomFilterCheckbox(onClick = { /*TODO*/ }, isChecked = true)
+                    HomFilterCheckbox(
+                        onClick = { onAction(HomeFilterDialogAction.OnRestaurantsClick) },
+                        isChecked = filterSettings.restaurants)
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Divider(modifier = Modifier.fillMaxWidth())
@@ -65,7 +74,9 @@ fun HomeFilterDialog (
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text (text = "Museos")
-                    HomFilterCheckbox(onClick = { /*TODO*/ }, isChecked = false)
+                    HomFilterCheckbox(
+                        onClick = { onAction(HomeFilterDialogAction.OnMuseumsClick)  },
+                        isChecked = filterSettings.museums)
                 }
             }
         }, shape = RoundedCornerShape(30.dp)
@@ -75,5 +86,5 @@ fun HomeFilterDialog (
 @Preview
 @Composable
 fun HomeFilterDialogPreview() {
-    HomeFilterDialog({})
+    HomeFilterDialog({}, filterSettings = HomeFilterSettings(), {})
 }
