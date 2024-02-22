@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -68,17 +70,28 @@ fun HomeScreen(
                 Text(text = it)
             }
         } ?: item {
-            Column(modifier = Modifier.fillMaxWidth()) {
-                Text(text = "Lugares Populares")
-                HomePopularFilter(
-                    modifier = Modifier.fillMaxWidth(),
-                    selectedRegion = state.selectedRegion,
-                    selectRegion = {
-                        viewModel.onRegionSelect(it)
+            if (state.popularPlaces.isNotEmpty()) {
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    Text(text = "Lugares Populares")
+                    HomePopularFilter(
+                        modifier = Modifier.fillMaxWidth(),
+                        selectedRegion = state.selectedRegion,
+                        selectRegion = {
+                            viewModel.onRegionSelect(it)
+                        }
+                    )
+                    LazyRow(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        items(state.popularPlaces) {
+                            TextButton(onClick = { /*TODO*/ }) {
+                                Text(text = "${it.country}, ${it.city}")
+                            }
+                        }
                     }
-                )
+                }
             }
         }
-
     }
 }

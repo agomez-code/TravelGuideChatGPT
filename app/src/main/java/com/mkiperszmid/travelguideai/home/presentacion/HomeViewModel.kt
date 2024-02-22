@@ -18,6 +18,18 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
     var state by mutableStateOf(HomeState())
         private set
 
+    init {
+        viewModelScope.launch {
+            repository.getPopularPlaces().onSuccess {
+                state = state.copy(
+                    popularPlaces = it
+                )
+            }.onFailure {
+                println("Hubo un error")
+            }
+        }
+    }
+
     fun search() {
         viewModelScope.launch {
             repository.getTravelGuide(state.searchText, state.filterSettings).onSuccess {
