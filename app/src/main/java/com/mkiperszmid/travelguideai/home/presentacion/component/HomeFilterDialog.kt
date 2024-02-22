@@ -20,10 +20,11 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun HomeFilterDialog (
+    onDismiss: () -> Unit,
     modifier: Modifier = Modifier
 ){
     AlertDialog(
-        onDismissRequest = { /*TODO*/ },
+        onDismissRequest = onDismiss,
         modifier = modifier.fillMaxWidth(),
         buttons = {
             Button(
@@ -74,5 +75,5 @@ fun HomeFilterDialog (
 @Preview
 @Composable
 fun HomeFilterDialogPreview() {
-    HomeFilterDialog()
+    HomeFilterDialog({})
 }

@@ -24,7 +24,11 @@ fun HomeScreen(
     val state = viewModel.state
 
     if(state.showDialog) {
-        HomeFilterDialog()
+        HomeFilterDialog(
+            onDismiss = {
+                viewModel.onFilterDismiss()
+            }
+        )
     }
 
     Column(modifier = Modifier.fillMaxSize()) {

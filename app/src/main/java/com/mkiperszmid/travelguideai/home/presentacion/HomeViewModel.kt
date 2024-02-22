@@ -39,5 +39,10 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         )
     }
 
+    fun onFilterDismiss() {
+        state = state.copy(
+            showDialog = false
+        )
+    }
 
 }
