@@ -41,14 +41,18 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
 
     fun onFilterDismiss() {
         state = state.copy(
-            showDialog = false
+            showDialog = false,
+            filterSettings = state.filterSettingsBackup
         )
     }
 
     fun onSettingChange(action: HomeFilterDialogAction) {
         when(action){
             HomeFilterDialogAction.OnApplyClick -> {
-                TODO()
+                state = state.copy(
+                    filterSettingsBackup = state.filterSettings,
+                    showDialog = false
+                )
             }
             HomeFilterDialogAction.OnMuseumsClick -> {
                 state = state.copy(
