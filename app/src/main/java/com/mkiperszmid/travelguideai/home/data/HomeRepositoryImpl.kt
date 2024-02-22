@@ -3,8 +3,10 @@ package com.mkiperszmid.travelguideai.home.data
 import com.mkiperszmid.travelguideai.home.data.remote.ChatGptApi
 import com.mkiperszmid.travelguideai.home.data.remote.dto.ChatRequestDto
 import com.mkiperszmid.travelguideai.home.data.remote.dto.Message
-import com.mkiperszmid.travelguideai.home.domain.HomeFilterSettings
+import com.mkiperszmid.travelguideai.home.domain.model.HomeFilterSettings
 import com.mkiperszmid.travelguideai.home.domain.HomeRepository
+import com.mkiperszmid.travelguideai.home.domain.model.Place
+import com.mkiperszmid.travelguideai.home.domain.model.Region
 
 class HomeRepositoryImpl(
     private val api: ChatGptApi
@@ -33,5 +35,18 @@ class HomeRepositoryImpl(
             Result.failure(e)
         }
 
+    }
+
+    override suspend fun getPopularPlaces(): Result<List<Place>> {
+        return Result.success(
+            listOf(
+                Place("USA", "New York", Region.AMERICA),
+                Place("Argentina", "Salta", Region.AMERICA),
+                Place("España", "Barcelona", Region.EUROPA),
+                Place("Australia", "Sydney", Region.OCEANIA),
+                Place("Japon", "Tokio", Region.ASIA),
+                Place("Italia", "Roma", Region.EUROPA)
+            )
+        )
     }
 }

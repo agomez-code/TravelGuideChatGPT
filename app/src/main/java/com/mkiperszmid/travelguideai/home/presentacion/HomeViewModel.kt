@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mkiperszmid.travelguideai.BuildConfig
 import com.mkiperszmid.travelguideai.home.domain.HomeRepository
+import com.mkiperszmid.travelguideai.home.domain.model.Region
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -51,6 +52,12 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
     fun onBackPress() {
         state = state.copy(
             chatReply = null
+        )
+    }
+
+    fun onRegionSelect(region: Region){
+        state = state.copy(
+            selectedRegion = region
         )
     }
 
