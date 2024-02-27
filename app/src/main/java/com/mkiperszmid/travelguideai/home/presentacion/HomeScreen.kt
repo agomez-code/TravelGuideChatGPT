@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -57,23 +58,19 @@ fun HomeScreen(
     }
 
     LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp)
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(24.dp),
+        contentPadding = PaddingValues(vertical = 32.dp, horizontal = 16.dp)
     ) {
         item {
-            Spacer(modifier = Modifier.height(32.dp))
             Text(
-                text = "A donde viajas?",
-                fontSize = 28.sp
+                text = "A donde viajas?", fontSize = 28.sp
             )
-            Spacer(modifier = Modifier.height(32.dp))
         }
 
         item {
             Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -85,7 +82,6 @@ fun HomeScreen(
                     onValueChange = { viewModel.onSearchTextChange(it) })
                 HomeFilterButton(onClick = { viewModel.onFilterClick() })
             }
-            Spacer(modifier = Modifier.height(32.dp))
         }
 
 
@@ -115,12 +111,12 @@ fun HomeScreen(
                         horizontalArrangement = Arrangement.spacedBy(24.dp)
                     ) {
                         items(state.popularPlaces) {
-                            Box(
-                                modifier = Modifier.size(180.dp, 250.dp)
-                                    .clickable {
-                                        viewModel.onSearchTextChange("${it.country}, ${it.city}")
-                                    }.clip(RoundedCornerShape(20.dp))
-                            ) {
+                            Box(modifier = Modifier
+                                .size(180.dp, 250.dp)
+                                .clickable {
+                                    viewModel.onSearchTextChange("${it.country}, ${it.city}")
+                                }
+                                .clip(RoundedCornerShape(20.dp))) {
                                 AsyncImage(
                                     model = it.image,
                                     contentDescription = "${it.country} ${it.city}",
@@ -131,7 +127,9 @@ fun HomeScreen(
                                     color = Color.White,
                                     fontSize = 13.sp,
                                     fontWeight = FontWeight.Black,
-                                    modifier = Modifier.align(Alignment.BottomStart).padding(12.dp)
+                                    modifier = Modifier
+                                        .align(Alignment.BottomStart)
+                                        .padding(12.dp)
                                 )
                                 TextButton(onClick = {
                                     viewModel.onSearchTextChange("${it.country}, ${it.city}")
