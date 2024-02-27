@@ -14,6 +14,7 @@ import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import com.mkiperszmid.travelguideai.home.domain.model.Region
+import com.mkiperszmid.travelguideai.ui.theme.DarkGreen
 
 @Composable
 fun HomePopularFilter(
@@ -27,7 +28,7 @@ fun HomePopularFilter(
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         Region.values().forEach {
-            val textColor = if (it == selectedRegion) Color.Green else Color.Gray
+            val textColor = if (it == selectedRegion) DarkGreen else Color.Gray
             TextButton(onClick = { selectRegion(it) }) {
                 Text(text = it.name.lowercase().capitalize(Locale.current), color = textColor)
             }

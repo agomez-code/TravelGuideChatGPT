@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mkiperszmid.travelguideai.ui.theme.DarkGreen
 
 @Composable
 fun HomFilterSettingsButton (
@@ -32,7 +33,7 @@ fun HomFilterSettingsButton (
         Icon(
             imageVector = icon,
             contentDescription = "icon",
-            tint = Color.Green)
+            tint = DarkGreen)
         }
     }
 }

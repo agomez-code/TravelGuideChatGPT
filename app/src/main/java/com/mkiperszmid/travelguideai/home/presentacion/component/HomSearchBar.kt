@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mkiperszmid.travelguideai.ui.theme.BackgroundGray
+import com.mkiperszmid.travelguideai.ui.theme.DarkGreen
 
 //Captura de valores - barra de busqueda
 @Composable
@@ -30,7 +32,7 @@ fun HomeSearchBar(
         placeholder = {
             Text(text = placeholder)
         },
-        modifier = modifier.background(color = Color.LightGray, shape = RoundedCornerShape(86.dp)),
+        modifier = modifier.background(color = BackgroundGray, shape = RoundedCornerShape(86.dp)),
         singleLine = true,
         trailingIcon = {
             HomeSearchButton(
@@ -41,7 +43,8 @@ fun HomeSearchBar(
         },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = Color.Transparent,
-            unfocusedBorderColor = Color.Transparent
+            unfocusedBorderColor = Color.Transparent,
+            cursorColor = DarkGreen
         )
     )
 }
