@@ -132,29 +132,6 @@ fun HomeScreen(
                                         viewModel.onSearchTextChange(it)
                                     }
                                 )
-
-                                /*
-                                Box(modifier = Modifier
-                                    .size(180.dp, 250.dp)
-                                    .clickable {
-                                        viewModel.onSearchTextChange("${it.country}, ${it.city}")
-                                    }
-                                    .clip(RoundedCornerShape(20.dp))) {
-                                    AsyncImage(
-                                        model = it.image,
-                                        contentDescription = "${it.country} ${it.city}",
-                                        contentScale = ContentScale.Crop
-                                    )
-                                    Text(
-                                        text = "${it.country}, ${it.city}",
-                                        color = Color.White,
-                                        fontSize = 13.sp,
-                                        fontWeight = FontWeight.Black,
-                                        modifier = Modifier
-                                            .align(Alignment.BottomStart)
-                                            .padding(12.dp)
-                                    )
-                                }*/
                             }
                         }
                     }
