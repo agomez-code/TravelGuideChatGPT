@@ -18,6 +18,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -38,6 +40,7 @@ import com.mkiperszmid.travelguideai.home.presentacion.component.HomeFilterButto
 import com.mkiperszmid.travelguideai.home.presentacion.component.HomeFilterDialog
 import com.mkiperszmid.travelguideai.home.presentacion.component.HomePopularFilter
 import com.mkiperszmid.travelguideai.home.presentacion.component.HomeSearchBar
+import com.mkiperszmid.travelguideai.ui.theme.DarkGreen
 
 @Composable
 fun HomeScreen(
@@ -58,8 +61,7 @@ fun HomeScreen(
     }
 
     LazyColumn(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(32.dp),
         contentPadding = PaddingValues(vertical = 32.dp)
     ) {
@@ -73,7 +75,9 @@ fun HomeScreen(
 
         item {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -87,54 +91,68 @@ fun HomeScreen(
             }
         }
 
-        state.chatReply?.let {
+        if (state.isLoading) {
             item {
-                Text(text = it, modifier = Modifier.padding(horizontal = 16.dp))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 30.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator(color = DarkGreen)
+                }
             }
-        } ?: item {
-            if (state.popularPlaces.isNotEmpty()) {
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    Text(
-                        text = "Lugares Populares",
-                        fontSize = 17.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(horizontal = 16.dp)
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
-                    HomePopularFilter(modifier = Modifier
-                        .fillMaxWidth().padding(horizontal = 16.dp),
-                        selectedRegion = state.selectedRegion,
-                        selectRegion = {
-                            viewModel.onRegionSelect(it)
-                        })
-                    Spacer(modifier = Modifier.height(12.dp))
-                    LazyRow(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(24.dp),
-                        contentPadding = PaddingValues(horizontal = 16.dp)
-                    ) {
-                        items(state.popularPlaces) {
-                            Box(modifier = Modifier
-                                .size(180.dp, 250.dp)
-                                .clickable {
-                                    viewModel.onSearchTextChange("${it.country}, ${it.city}")
+        } else {
+            state.chatReply?.let {
+                item {
+                    Text(text = it, modifier = Modifier.padding(horizontal = 16.dp))
+                }
+            } ?: item {
+                if (state.popularPlaces.isNotEmpty()) {
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        Text(
+                            text = "Lugares Populares",
+                            fontSize = 17.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(horizontal = 16.dp)
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+                        HomePopularFilter(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp),
+                            selectedRegion = state.selectedRegion,
+                            selectRegion = {
+                                viewModel.onRegionSelect(it)
+                            })
+                        Spacer(modifier = Modifier.height(12.dp))
+                        LazyRow(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(24.dp),
+                            contentPadding = PaddingValues(horizontal = 16.dp)
+                        ) {
+                            items(state.popularPlaces) {
+                                Box(modifier = Modifier
+                                    .size(180.dp, 250.dp)
+                                    .clickable {
+                                        viewModel.onSearchTextChange("${it.country}, ${it.city}")
+                                    }
+                                    .clip(RoundedCornerShape(20.dp))) {
+                                    AsyncImage(
+                                        model = it.image,
+                                        contentDescription = "${it.country} ${it.city}",
+                                        contentScale = ContentScale.Crop
+                                    )
+                                    Text(
+                                        text = "${it.country}, ${it.city}",
+                                        color = Color.White,
+                                        fontSize = 13.sp,
+                                        fontWeight = FontWeight.Black,
+                                        modifier = Modifier
+                                            .align(Alignment.BottomStart)
+                                            .padding(12.dp)
+                                    )
                                 }
-                                .clip(RoundedCornerShape(20.dp))) {
-                                AsyncImage(
-                                    model = it.image,
-                                    contentDescription = "${it.country} ${it.city}",
-                                    contentScale = ContentScale.Crop
-                                )
-                                Text(
-                                    text = "${it.country}, ${it.city}",
-                                    color = Color.White,
-                                    fontSize = 13.sp,
-                                    fontWeight = FontWeight.Black,
-                                    modifier = Modifier
-                                        .align(Alignment.BottomStart)
-                                        .padding(12.dp)
-                                )
                             }
                         }
                     }
