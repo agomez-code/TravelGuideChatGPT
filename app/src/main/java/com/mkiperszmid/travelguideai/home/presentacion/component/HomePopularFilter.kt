@@ -1,10 +1,7 @@
 package com.mkiperszmid.travelguideai.home.presentacion.component
 
-import android.widget.Space
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -31,9 +28,7 @@ fun HomePopularFilter(
         Region.values().forEach {
             val textColor = if (it == selectedRegion) DarkGreen else Color.Gray
             TextButton(
-                onClick = { selectRegion(it) }, colors = ButtonDefaults.textButtonColors(
-                    contentColor = DarkGreen
-                )
+                onClick = { selectRegion(it) }
             ) {
                 Text(text = it.name.lowercase().capitalize(Locale.current), color = textColor)
             }

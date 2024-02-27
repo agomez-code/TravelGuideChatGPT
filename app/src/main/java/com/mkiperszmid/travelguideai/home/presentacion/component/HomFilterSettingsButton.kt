@@ -25,7 +25,7 @@ fun HomFilterSettingsButton (
     OutlinedButton(
         onClick = onClick,
         modifier = modifier.defaultMinSize(ButtonDefaults.MinHeight, ButtonDefaults.MinHeight),
-        colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.Transparent, contentColor = DarkGreen),
+        colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.Transparent/*, contentColor = DarkGreen*/),
         shape = RoundedCornerShape(10.dp),
         contentPadding = PaddingValues(0.dp)
     ){

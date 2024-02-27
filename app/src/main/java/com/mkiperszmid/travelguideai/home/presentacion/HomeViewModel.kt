@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mkiperszmid.travelguideai.BuildConfig
 import com.mkiperszmid.travelguideai.home.domain.HomeRepository
 import com.mkiperszmid.travelguideai.home.domain.model.Region
 import dagger.hilt.android.lifecycle.HiltViewModel

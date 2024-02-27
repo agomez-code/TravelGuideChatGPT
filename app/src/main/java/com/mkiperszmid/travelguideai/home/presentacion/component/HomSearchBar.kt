@@ -1,6 +1,5 @@
 package com.mkiperszmid.travelguideai.home.presentacion.component
 
-import android.widget.NumberPicker.OnValueChangeListener
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,7 +14,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mkiperszmid.travelguideai.ui.theme.BackgroundGray
-import com.mkiperszmid.travelguideai.ui.theme.DarkGreen
 
 //Captura de valores - barra de busqueda
 @Composable
@@ -43,8 +41,7 @@ fun HomeSearchBar(
         },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = Color.Transparent,
-            unfocusedBorderColor = Color.Transparent,
-            cursorColor = DarkGreen
+            unfocusedBorderColor = Color.Transparent
         )
     )
 }
