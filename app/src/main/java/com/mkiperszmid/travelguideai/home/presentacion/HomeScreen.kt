@@ -86,7 +86,9 @@ fun HomeScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         items(state.popularPlaces) {
-                            TextButton(onClick = { /*TODO*/ }) {
+                            TextButton(onClick = {
+                                viewModel.onSearchTextChange("${it.country}, ${it.city}")
+                            }) {
                                 Text(text = "${it.country}, ${it.city}")
                             }
                         }
