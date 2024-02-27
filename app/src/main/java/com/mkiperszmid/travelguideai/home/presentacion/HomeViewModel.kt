@@ -22,7 +22,7 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         viewModelScope.launch {
             repository.getPopularPlaces().onSuccess {
                 state = state.copy(
-                    popularPlaces = it
+                    popularPlaces = it, popularPlacesBackup = it
                 )
             }.onFailure {
                 println("Hubo un error")
@@ -56,8 +56,7 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
 
     fun onFilterDismiss() {
         state = state.copy(
-            showDialog = false,
-            filterSettings = state.filterSettingsBackup
+            showDialog = false, filterSettings = state.filterSettingsBackup
         )
     }
 
@@ -67,20 +66,19 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         )
     }
 
-    fun onRegionSelect(region: Region){
-        state = state.copy(
-            selectedRegion = region
-        )
+    fun onRegionSelect(region: Region) {
+        state = state.copy(selectedRegion = region,
+            popularPlaces = if (region != Region.TODAS) state.popularPlacesBackup.filter { it.region == region } else state.popularPlacesBackup)
     }
 
     fun onSettingChange(action: HomeFilterDialogAction) {
-        when(action){
+        when (action) {
             HomeFilterDialogAction.OnApplyClick -> {
                 state = state.copy(
-                    filterSettingsBackup = state.filterSettings,
-                    showDialog = false
+                    filterSettingsBackup = state.filterSettings, showDialog = false
                 )
             }
+
             HomeFilterDialogAction.OnMuseumsClick -> {
                 state = state.copy(
                     filterSettings = state.filterSettings.copy(
@@ -88,6 +86,7 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
                     )
                 )
             }
+
             HomeFilterDialogAction.OnPeopleMinus -> {
                 state = state.copy(
                     filterSettings = state.filterSettings.copy(
@@ -95,6 +94,7 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
                     )
                 )
             }
+
             HomeFilterDialogAction.OnPeoplePlus -> {
                 state = state.copy(
                     filterSettings = state.filterSettings.copy(
@@ -102,6 +102,7 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
                     )
                 )
             }
+
             HomeFilterDialogAction.OnRestaurantsClick -> {
                 state = state.copy(
                     filterSettings = state.filterSettings.copy(

@@ -65,6 +65,7 @@ fun HomeScreen(
             }
         }
 
+
         state.chatReply?.let {
             item {
                 Text(text = it)
