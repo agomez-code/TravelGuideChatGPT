@@ -33,6 +33,7 @@ import coil.compose.AsyncImage
 import com.mkiperszmid.travelguideai.home.presentacion.component.HomeFilterButton
 import com.mkiperszmid.travelguideai.home.presentacion.component.HomeFilterDialog
 import com.mkiperszmid.travelguideai.home.presentacion.component.HomePopularFilter
+import com.mkiperszmid.travelguideai.home.presentacion.component.HomePopularPlaceItem
 import com.mkiperszmid.travelguideai.home.presentacion.component.HomeSearchBar
 
 @Composable
@@ -124,7 +125,15 @@ fun HomeScreen(
                             horizontalArrangement = Arrangement.spacedBy(24.dp),
                             contentPadding = PaddingValues(horizontal = 16.dp)
                         ) {
-                            items(state.popularPlaces) {
+                            items(state.popularPlaces) { place ->
+                                HomePopularPlaceItem(
+                                    place = place,
+                                    onPlaceClick = {
+                                        viewModel.onSearchTextChange(it)
+                                    }
+                                )
+
+                                /*
                                 Box(modifier = Modifier
                                     .size(180.dp, 250.dp)
                                     .clickable {
@@ -145,7 +154,7 @@ fun HomeScreen(
                                             .align(Alignment.BottomStart)
                                             .padding(12.dp)
                                     )
-                                }
+                                }*/
                             }
                         }
                     }
