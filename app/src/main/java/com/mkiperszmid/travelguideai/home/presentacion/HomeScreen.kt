@@ -58,19 +58,22 @@ fun HomeScreen(
     }
 
     LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(24.dp),
-        contentPadding = PaddingValues(vertical = 32.dp, horizontal = 16.dp)
+        modifier = Modifier
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(32.dp),
+        contentPadding = PaddingValues(vertical = 32.dp)
     ) {
         item {
             Text(
-                text = "A donde viajas?", fontSize = 28.sp
+                text = "A donde viajas?",
+                fontSize = 28.sp,
+                modifier = Modifier.padding(horizontal = 16.dp)
             )
         }
 
         item {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -84,10 +87,9 @@ fun HomeScreen(
             }
         }
 
-
         state.chatReply?.let {
             item {
-                Text(text = it)
+                Text(text = it, modifier = Modifier.padding(horizontal = 16.dp))
             }
         } ?: item {
             if (state.popularPlaces.isNotEmpty()) {
@@ -99,7 +101,8 @@ fun HomeScreen(
                         modifier = Modifier.padding(horizontal = 16.dp)
                     )
                     Spacer(modifier = Modifier.height(12.dp))
-                    HomePopularFilter(modifier = Modifier.fillMaxWidth(),
+                    HomePopularFilter(modifier = Modifier
+                        .fillMaxWidth().padding(horizontal = 16.dp),
                         selectedRegion = state.selectedRegion,
                         selectRegion = {
                             viewModel.onRegionSelect(it)
@@ -108,7 +111,8 @@ fun HomeScreen(
                     LazyRow(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(24.dp)
+                        horizontalArrangement = Arrangement.spacedBy(24.dp),
+                        contentPadding = PaddingValues(horizontal = 16.dp)
                     ) {
                         items(state.popularPlaces) {
                             Box(modifier = Modifier
@@ -131,11 +135,6 @@ fun HomeScreen(
                                         .align(Alignment.BottomStart)
                                         .padding(12.dp)
                                 )
-                                TextButton(onClick = {
-                                    viewModel.onSearchTextChange("${it.country}, ${it.city}")
-                                }) {
-
-                                }
                             }
                         }
                     }
